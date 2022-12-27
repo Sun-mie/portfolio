@@ -1,0 +1,42 @@
+# server port setting
+server:
+  port: 80
+
+# jdbc setting
+spring:
+    datasource:
+        hikari:
+            connection-test-query: SELECT 1
+            minimum-idle: 2
+            maximum-pool-size: 5
+            pool-name: SendBugHikariCP
+            auto-commit: false
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        url: jdbc:log4jdbc:mariadb://database-1.cvep7fs7rxci.ap-northeast-2.rds.amazonaws.com:3306/EZEN
+        username: ezen
+        password: r1r2r3
+        type: com.zaxxer.hikari.HikariDataSource
+# jsp setting
+    mvc:
+#      view:
+#        prefix: /WEB-INF/views/
+#        suffix: .jsp
+      pathmatch:
+        matching-strategy: ANT_PATH_MATCHER
+
+#      static-path-pattern: /resources/**
+# mybatis setting 
+mybatis:
+    type-aliases-package: com.mentor.mentee.domain
+    mapper-locations: mapper/**/*.xml
+    configuration:
+        map-underscore-to-camel-case: true
+        default-statement-timeout: 30
+
+# jwt setting
+jwt:
+   secret: runtime
+
+multipart:
+  maxFileSize=5MB
+  maxRequestSize=5MB
